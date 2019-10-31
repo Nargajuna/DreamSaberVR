@@ -310,7 +310,10 @@ namespace VRTK
         /// The WaitForControllerModel method determines whether the controller model for the given hand requires waiting to load in on scene start.
         /// </summary>
         /// <param name="hand">The hand to determine if the controller model will be ready for.</param>
-        /// <returns>Returns true if the controller model requires loading in at runtime and therefore needs waiting for. Returns false if the controller model will be available at start.</returns>
+        /// <returns>Returns true if the controller model requires loading in at 
+        /// 
+        /// 
+        /// and therefore needs waiting for. Returns false if the controller model will be available at start.</returns>
         public override bool WaitForControllerModel(ControllerHand hand)
         {
             //If Oculus avatar isn't being used or the default model isn't set or the current controller model isn't the default controller model, then don't bother waiting for the model to stream in.
@@ -689,7 +692,8 @@ namespace VRTK
                     bool isDefaultModel = (defaultSDKLeftControllerModel != null && defaultSDKRightControllerModel != null && GetControllerModel(ControllerHand.Left) == defaultSDKLeftControllerModel.gameObject && GetControllerModel(ControllerHand.Right) == defaultSDKRightControllerModel.gameObject);
                     if (avatar != null && isDefaultModel)
                     {
-                        avatar.AssetsDoneLoading.AddListener(BothControllersReady);
+                        //  avatar.AssetsDoneLoading.AddListener(BothControllersReady);
+                        BothControllersReady();
                     }
                 }
 #endif

@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Android;
 
 public class MainMenu : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class MainMenu : MonoBehaviour
     private ScoreHandling ScoreHandling;
     private AudioHandling AudioHandling;
 
+
     private HighScore.HighScore score = new HighScore.HighScore();
 
     AudioClip PreviewAudioClip = null;
@@ -38,6 +40,8 @@ public class MainMenu : MonoBehaviour
         SceneHandling = GameObject.FindGameObjectWithTag("SceneHandling").GetComponent<SceneHandling>();
         ScoreHandling = GameObject.FindGameObjectWithTag("ScoreHandling").GetComponent<ScoreHandling>();
         AudioHandling = GameObject.FindGameObjectWithTag("AudioHandling").GetComponent<AudioHandling>();
+
+
     }
 
     public void ShowSongs()
