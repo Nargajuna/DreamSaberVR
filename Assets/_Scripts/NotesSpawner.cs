@@ -26,6 +26,7 @@ public class NotesSpawner : MonoBehaviour
 
     private string jsonString;
     private string audioFilePath;
+    public string songLocalFilePath;
     private List<Note> NotesToSpawn = new List<Note>();
     private List<Obstacle> ObstaclesToSpawn = new List<Obstacle>();
     private double BeatsPerMinute;
@@ -204,6 +205,7 @@ public class NotesSpawner : MonoBehaviour
 
     private IEnumerator LoadAudio()
     {
+        Debug.Log("NOAHDEBUG Loading audio file of path: " + Songsettings.CurrentSong.AudioFilePath);
         var downloadHandler = new DownloadHandlerAudioClip(Songsettings.CurrentSong.AudioFilePath, AudioType.OGGVORBIS);
         downloadHandler.compressed = false;
         downloadHandler.streamAudio = true;
@@ -216,6 +218,7 @@ public class NotesSpawner : MonoBehaviour
         var request = uwr.SendWebRequest();
         while (!request.isDone)
             yield return null;
+
 
         audioSource.clip = DownloadHandlerAudioClip.GetContent(uwr);
         audioLoaded = true;

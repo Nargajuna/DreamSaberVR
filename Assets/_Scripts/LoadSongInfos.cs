@@ -28,17 +28,26 @@ public class LoadSongInfos : MonoBehaviour
     public Text BPM;
     public Text Levels;
     private SongSettings Songsettings;
+    private PermissionHandling PermissionHandling;
 
     private void Awake()
     {
+        PermissionHandling = GameObject.FindGameObjectWithTag("PermissionHandling").GetComponent<PermissionHandling>();
         Songsettings = GameObject.FindGameObjectWithTag("SongSettings").GetComponent<SongSettings>();
     }
 
     private void OnEnable()
     {
-        string path = Path.Combine(Application.dataPath + "/Playlists");
-        if (Directory.Exists(path))
-        {
+        //string beatOnDataPath = Path.Combine("/sdcard/BeatOnData" + "/CustomSongs");
+        string internalPath = Path.Combine(Application.persistentDataPath + "/Playlists");
+        string path = internalPath;
+       // if (Directory.Exists(beatOnDataPath))
+        // {
+        //    path = beatOnDataPath;
+       //}
+        Debug.Log("NOADBEBUG persistentDataPath is " + path);
+        //DirectoryInfo levelDirectoryPath = new DirectoryInfo(path);
+        if (Directory.Exists(path)) { 
             foreach (var dir in Directory.GetDirectories(path))
             {
                 if (Directory.Exists(dir) && Directory.GetFiles(dir, "info.dat").Length > 0)
@@ -51,9 +60,16 @@ public class LoadSongInfos : MonoBehaviour
                     song.AuthorName = infoFile.GetString("_songAuthorName");
                     song.BPM = infoFile.GetNumber("_beatsPerMinute").ToString();
                     song.CoverImagePath = Path.Combine(dir, infoFile.GetString("_coverImageFilename"));
-                    song.AudioFilePath = Path.Combine(dir, infoFile.GetString("_songFilename"));
-                    song.PlayingMethods = new List<PlayingMethod>();
 
+                    //a little logic to support Android file systems, hopefully without breaking support for fetching songs remotely
+                    song.AudioFilePath = Path.Combine(dir, infoFile.GetString("_songFilename"));
+                    var songPathProtocol = infoFile.GetString("_songFilename").Substring(0, 4).ToUpper();
+                    if (songPathProtocol != "HTTP" && songPathProtocol != "FILE") {
+                        song.AudioFilePath = "File://" + song.AudioFilePath;
+                    }
+
+                    song.PlayingMethods = new List<PlayingMethod>();
+                    Debug.Log("NOADBEBUG Parsed Song is " + song.Name);
                     var difficultyBeatmapSets = infoFile.GetArray("_difficultyBeatmapSets");
                     foreach (var beatmapSets in difficultyBeatmapSets)
                     {
@@ -68,7 +84,7 @@ public class LoadSongInfos : MonoBehaviour
 
                         song.PlayingMethods.Add(playingMethod);
                     }
-
+                    Debug.Log("NOADBEBUG Adding Song is " + song.Name);
                     AllSongs.Add(song);
                 }
             }
