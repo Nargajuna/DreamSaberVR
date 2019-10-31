@@ -1,3 +1,7 @@
+# Forked by nstolmaker!
+
+I've made a Quest build that works. You have to copy some songs folders into /storage/emulated/0/Android/data/com.quest.opensabervr/files/Playlists/ -- but after you do that it should work!
+
 ![alt text](https://img.itch.zone/aW1nLzIxNzU5MTkucG5n/original/88KBuM.png "")
 # Development stopped
 After four releases (latest v0.1.3) I'm totally happy with the current development state of the game. It's fully working and has more features included like I ever wanted in the beginning of the development of OpenSaberVR. That said I won't active develop any further on OpenSaberVR. 
