@@ -243,6 +243,10 @@ public sealed class VRTK_UpdatePrompt : EditorWindow
 
     private static void CheckForUpdate()
     {
+        return;
+    }
+    private static void CheckForUpdateOLD()
+    {
         changelogScrollPosition = Vector3.zero;
         changelogWidth = 0;
         changelogPageIndex = 0;
