@@ -170,6 +170,7 @@ public class MainMenu : MonoBehaviour
             SongPreview.Stop();
             SongPreview.clip = PreviewAudioClip;
             SongPreview.time = 40f;
+            SongPreview.volume = .4f;
             SongPreview.Play();
         }
     }
