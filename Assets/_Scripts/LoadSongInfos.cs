@@ -39,24 +39,29 @@ public class LoadSongInfos : MonoBehaviour
 
     private void OnEnable()
     {
-
+        Debug.Log("NOADBEBUG Application.streamingAssetsPath: " + Application.streamingAssetsPath);
         // this is for files which you put in the data folder by hand. On my quest that folder is:
         // /storage/emulated/0/Android/data/com.quest.opensabervr/files/Playlists
         // for historical reasons, the folder is still called "Playlists" even though 
         // BeatOn now calls the folder CustomSongs, and there's a separate playlist folder that does something else. 
         string internalPath = Path.Combine(Application.persistentDataPath + "/Playlists");
-        string beatOnDataPath = Path.Combine("/sdcard/BeatOnData" + "/CustomSongsBREAK");
+        string beatOnDataPath = Path.Combine("/sdcard/BeatOnData" + "/CustomSongs");
+        string builtInSongPath = Application.streamingAssetsPath + "/Playlists/hips_dont_lie/";
+        Debug.Log("NOADBEBUG internalPath: " + internalPath);
+        Debug.Log("NOADBEBUG internalPath: " + beatOnDataPath);
+        Debug.Log("NOADBEBUG internalPath: " + builtInSongPath);
+        //LoadSong(builtInSongPath);
         LoadSongs(internalPath);
         LoadSongs(beatOnDataPath);
         // on Android, Unity compiles StreamingAssets into the base apk file, which is a jar. Basically a zip file.
         // we can still get files from it, but we can't do a directory list like we do with the other folders. 
         // in the interest of having at least one song always be a part of the build, I'm essentially hard-coding this one in.
-        LoadSong(Path.Combine(Application.streamingAssetsPath + "/Playlists/hips_dont_lie/"));
+
     }
 
     private void LoadSongs(string path)
     {
-        Debug.Log("NOADBEBUG persistentDataPath is " + path);
+        Debug.Log("NOADBEBUG loading songs from" + path);
         if (Directory.Exists(path))
         {
             foreach (var dir in Directory.GetDirectories(path))
