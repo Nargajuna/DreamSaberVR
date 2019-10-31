@@ -1,6 +1,23 @@
 # Forked by nstolmaker!
 
+Adding some stuff to the readme to hopefully help others get it up and running.
+
 I've made a Quest build that works. You have to copy some songs folders into /storage/emulated/0/Android/data/com.quest.opensabervr/files/Playlists/ -- but after you do that it should work!
+
+## Assumptions
+
+0a. I built this using Unity 2019.2.4f1. The oculus SDK is baked in, so you shouldn't need to add that. 
+0b. You'll probably need all the other Android SDK tools, so this guide assumes you have them already and that you've successfully built *something* and had it run on your Quest.
+
+1. You will need to set up some Oculus stuff to get this to compile. Go get an oculus developer account, generate a key and put the sig file in: 
+Assets/Plugins/Android/assets/oculussig_ABCDE(file_goes_here)
+2. One song comes with the build. It will also look for songs in your BeatOnData folder. So it might just magically find your custom songs. If not, you will need to put songs into the android data folder: /storage/emulated/0/Android/data/com.quest.opensabervr/files/Playlists
+
+## NOTES!
+
+It probably wont build for SteamVR anymore. It shouldn't be hard to fix that, but I do not have any devices to test with, so I'm not supporting anything except Quest for the moment.
+
+# ORIGINAL README:
 
 ![alt text](https://img.itch.zone/aW1nLzIxNzU5MTkucG5n/original/88KBuM.png "")
 # Development stopped
